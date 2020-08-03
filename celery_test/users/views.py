@@ -1,9 +1,17 @@
+from celery import shared_task
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from rest_framework import status
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
-from celery_test.celery import create_users_async
+from celery_test.celery import create_users_async, email_async
+
+
+@receiver(post_save, sender=User)
+def send_email(sender, **kwargs):
+    email_async.delay()
 
 
 class UserViewSet(ModelViewSet):

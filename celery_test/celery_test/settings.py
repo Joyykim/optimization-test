@@ -124,6 +124,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
@@ -133,3 +134,14 @@ CACHES = {
         }
     }
 }
+
+gmail = 'kjw11077naver@gmail.com'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = gmail
+EMAIL_HOST_PASSWORD = 'kim11077'
+SERVER_EMAIL = gmail
+DEFAULT_FROM_EMAIL = gmail
